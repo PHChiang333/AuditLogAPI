@@ -1,0 +1,6 @@
+@AuditLogAPI_HostAddress = http://localhost:5238
+
+GET {{AuditLogAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
