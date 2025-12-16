@@ -49,7 +49,7 @@ namespace AuditLogAPI.Controllers
             // 3) 這裡：解析 JSON -> 轉成物件（重點：parse JSON）
             // SP 回來可能是 null 或空字串
 
-            var jsonText = rows.FirstOrDefault().Json;
+            var jsonText = rows.FirstOrDefault()?.Json;
 
             if (string.IsNullOrWhiteSpace(jsonText))
             {
@@ -97,7 +97,7 @@ namespace AuditLogAPI.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, ProductPutDto dto)
+        public async Task<IActionResult> PutProduct(int id, [FromBody]ProductPutDto dto)
         {
 
             var entity = await _context.Products.FindAsync(id);
@@ -134,7 +134,7 @@ namespace AuditLogAPI.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(ProductPostDto dto)
+        public async Task<ActionResult<Product>> PostProduct([FromBody]ProductPostDto dto)
         {
             var entity = new Product
             {
